@@ -6,7 +6,6 @@ export default function useCustomerConfig(slug) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Sesuaikan base path (sama dengan di vite.config)
     fetch(`${import.meta.env.BASE_URL}config/${slug}.json`)
       .then((res) => {
         if (!res.ok) throw new Error('Undangan tidak ditemukan');
@@ -14,9 +13,7 @@ export default function useCustomerConfig(slug) {
       })
       .then((data) => {
         setConfig(data);
-        // Set atribut tema global
         document.documentElement.setAttribute('data-theme', data.theme || 'romantic');
-        // Ganti judul halaman
         document.title = `Undangan ${data.bride} & ${data.groom}`;
       })
       .catch((err) => setError(err.message))

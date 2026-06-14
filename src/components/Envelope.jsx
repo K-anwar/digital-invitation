@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import Confetti from './Confetti'; // Opsional, hapus jika tidak pakai
+import Confetti from './Confetti';
 
 export default function Envelope({ config, guest, children, onOpenInvitation }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,18 +9,15 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
   const handleOpen = () => {
     if (isOpen) return;
     setIsOpen(true);
-    // Mainkan suara amplop jika ada
     if (config.envelopeSound && audioRef.current) {
       audioRef.current.play().catch(() => {});
     }
-    // Tunda kemunculan konten sampai animasi flap selesai (700ms)
     setTimeout(() => {
       setShowContent(true);
     }, 600);
   };
 
   useEffect(() => {
-    // Preload suara
     if (config.envelopeSound) {
       audioRef.current = new Audio(config.envelopeSound);
       audioRef.current.volume = 0.4;
@@ -35,15 +32,13 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
         fontFamily: 'var(--font-body)',
       }}
     >
-      {/* Dekorasi bunga */}
       <div className="absolute top-10 left-10 opacity-20 text-9xl select-none">🌸</div>
       <div className="absolute bottom-10 right-10 opacity-20 text-9xl select-none">🌹</div>
 
       <Confetti active={isOpen} />
 
-      {/* Container amplop */}
       <div className="relative w-full max-w-md mx-auto" style={{ perspective: '1200px' }}>
-        {/* Badan amplop (belakang) */}
+        {/* Badan amplop */}
         <div
           className="relative w-full rounded-2xl shadow-2xl overflow-hidden"
           style={{
@@ -52,13 +47,12 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
             boxShadow: 'var(--shadow), 0 15px 40px rgba(0,0,0,0.2)',
           }}
         >
-          {/* Ornamen */}
           <div
             className="absolute inset-3 border-2 border-dashed rounded-xl opacity-30"
             style={{ borderColor: 'var(--primary)' }}
           ></div>
 
-          {/* Isi amplop (muncul setelah buka) */}
+          {/* Isi amplop */}
           <div
             className={`p-8 transition-all duration-700 ease-in-out ${
               showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
@@ -67,7 +61,6 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
           >
             {children}
 
-            {/* Tombol ke undangan lengkap */}
             {showContent && onOpenInvitation && (
               <div className="mt-6 text-center">
                 <button
@@ -81,7 +74,7 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
             )}
           </div>
 
-          {/* Konten default sebelum dibuka (tampil di badan amplop) */}
+          {/* Info sebelum dibuka */}
           {!isOpen && (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
               <p className="text-sm tracking-widest uppercase mb-2" style={{ color: 'var(--accent)' }}>
@@ -104,7 +97,7 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
           )}
         </div>
 
-        {/* Flap penutup amplop */}
+        {/* Flap penutup */}
         <div
           className={`absolute top-0 left-0 w-full h-full rounded-2xl transition-all duration-700 ease-in-out origin-top z-20 ${
             isOpen ? '-rotate-x-180 opacity-0 pointer-events-none' : 'rotate-x-0 opacity-100'
@@ -116,7 +109,6 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
             backfaceVisibility: 'hidden',
           }}
         >
-          {/* Segel / lak */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
             <div
               className="w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg cursor-pointer hover:scale-110 transition-transform"
@@ -133,7 +125,7 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
           <div className="absolute top-0 left-0 w-full h-2" style={{ backgroundColor: 'var(--primary)' }}></div>
         </div>
 
-        {/* Tombol buka di luar (jika belum terbuka) */}
+        {/* Tombol buka di luar */}
         {!isOpen && (
           <div className="mt-6 text-center">
             <button

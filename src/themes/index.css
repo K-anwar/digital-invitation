@@ -1,4 +1,3 @@
-/* === TEMA ROMANTIS === */
 :root {
   --primary: #d4a0a0;
   --primary-dark: #b56576;
@@ -14,7 +13,6 @@
   --radius: 24px;
 }
 
-/* === TEMA ELEGAN === */
 [data-theme="elegant"] {
   --primary: #9b2226;
   --primary-dark: #6a040f;
@@ -28,7 +26,6 @@
   --font-body: 'Montserrat', sans-serif;
 }
 
-/* === TEMA PASTEL === */
 [data-theme="pastel"] {
   --primary: #b8c9d4;
   --primary-dark: #8fa3b3;

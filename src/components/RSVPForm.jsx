@@ -7,19 +7,21 @@ export default function RSVPForm({ guest, slug, googleScriptUrl }) {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!googleScriptUrl) {
-      alert('URL Google Sheets belum dikonfigurasi.');
+      setError('URL Google Sheets belum dikonfigurasi.');
       return;
     }
     setLoading(true);
+    setError(null);
     try {
       await submitRSVP(googleScriptUrl, { guest, attending, pax, message, slug });
       setSubmitted(true);
     } catch (err) {
-      alert('Gagal mengirim RSVP, silakan coba lagi.');
+      setError('Gagal mengirim RSVP. Pastikan koneksi stabil atau coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -86,6 +88,10 @@ export default function RSVPForm({ guest, slug, googleScriptUrl }) {
           placeholder="Selamat menempuh hidup baru..."
         />
       </div>
+
+      {error && (
+        <div className="text-red-500 text-sm bg-red-50 p-2 rounded">{error}</div>
+      )}
 
       <button
         type="submit"

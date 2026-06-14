@@ -15,8 +15,7 @@ export default function InvitationPage() {
   if (loading) return <div className="min-h-screen flex items-center justify-center">Memuat...</div>;
   if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">{error}</div>;
 
-  // Link RSVP dengan nama tamu
-  const rsvpUrl = `${window.location.origin}${window.location.pathname}#/${slug}/rsvp?guest=${encodeURIComponent(guest)}`;
+  const checkinUrl = `${window.location.origin}${window.location.pathname}#/${slug}/checkin?guest=${encodeURIComponent(guest)}`;
 
   return (
     <div
@@ -28,25 +27,20 @@ export default function InvitationPage() {
         backgroundImage: 'radial-gradient(circle at 20% 30%, var(--primary-light) 0%, transparent 50%)',
       }}
     >
-      {/* Tombol Musik */}
       <MusicPlayer src={config.music} />
 
       <div className="max-w-2xl mx-auto space-y-10">
-        {/* Kartu Undangan */}
         <InvitationCard config={config} guest={guest} />
 
-        {/* Countdown */}
         <Countdown targetDate={config.eventDate} />
 
-        {/* Galeri */}
         <Gallery images={config.gallery} />
 
-        {/* QR Code RSVP */}
         <div className="flex flex-col items-center gap-4">
           <div className="bg-white p-3 rounded-2xl shadow-lg">
-            <QRCodeGenerator value={rsvpUrl} size={160} />
+            <QRCodeGenerator value={checkinUrl} size={160} />
           </div>
-          <p className="text-sm opacity-80">Scan QR untuk RSVP</p>
+          <p className="text-sm opacity-80">Scan QR saat hadir</p>
           <Link
             to={`/${slug}/rsvp?guest=${encodeURIComponent(guest)}`}
             className="px-6 py-2 rounded-full text-white font-semibold transition hover:opacity-90"

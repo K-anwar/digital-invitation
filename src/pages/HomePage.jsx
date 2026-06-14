@@ -26,7 +26,6 @@ export default function HomePage() {
     navigate(`/${slug}/invitation?guest=${encodeURIComponent(guest)}`);
   };
 
-  // Konten di dalam amplop setelah dibuka
   const envelopeContent = (
     <div className="text-center space-y-6">
       <div className="space-y-2">
