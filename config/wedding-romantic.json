@@ -9,7 +9,8 @@
   "address": "Jl. Mawar No. 12, Jakarta Pusat",
   "mapsUrl": "https://maps.google.com/?q=Gedung+Graha+Lestari+Jakarta",
   "theme": "romantic",
-  "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwQF0Msk8UooY4BgphjqRNJsFDGNN6ZAM83aswoMmiJ1rW_c59amnM_hgwZTHfV1HUv/exec",
+  "googleScriptUrl": "https://script.google.com/macros/s/AKfycbye-oDxiUyeMzTYFGig_avSxbJYrrhiUhHv3pc3dTFkSADZw7aGnXgNGCNH88PY9oH_/exec",
+  "checkinScriptUrl": "",
   "bridePhoto": "https://i.pravatar.cc/150?img=47",
   "groomPhoto": "https://i.pravatar.cc/150?img=12",
   "gallery": [
