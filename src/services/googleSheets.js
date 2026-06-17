@@ -1,31 +1,31 @@
-/**
- * Kirim data RSVP ke Google Sheets
- * Menggunakan mode no-cors untuk menghindari CORS preflight
- */
+// Default URL dari env (untuk development)
+const DEFAULT_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
+
 export async function submitRSVP(url, data) {
-  // Build URL dengan query string
+  const scriptUrl = url || DEFAULT_SCRIPT_URL;
+  
+  if (!scriptUrl) {
+    throw new Error('Google Script URL tidak dikonfigurasi');
+  }
+
   const params = new URLSearchParams(data).toString();
-  const fullUrl = `${url}?${params}`;
+  const fullUrl = `${scriptUrl}?${params}`;
+  
+  console.log('📤 Mengirim ke:', fullUrl);
   
   try {
-    // Kirim via GET (simple request, tidak trigger preflight)
     await fetch(fullUrl, { 
       method: 'GET',
       mode: 'no-cors' 
     });
-    
-    // Karena no-cors, kita anggap selalu sukses
+    console.log('✅ Terkirim');
     return { status: 'success' };
   } catch (error) {
-    console.error('Error submitting RSVP:', error);
+    console.error('❌ Error:', error);
     throw error;
   }
 }
 
-/**
- * Kirim data check-in ke Google Sheets
- * Fungsi sama dengan submitRSVP
- */
 export async function submitCheckin(url, data) {
   return submitRSVP(url, data);
 }
