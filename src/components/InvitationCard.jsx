@@ -1,4 +1,22 @@
+import { useMemo } from 'react';
+
 export default function InvitationCard({ config, guest }) {
+  const baseUrl = import.meta.env.BASE_URL;
+
+  const bridePhotoUrl = useMemo(() => {
+    if (!config.bridePhoto) return '';
+    return config.bridePhoto.startsWith('http') 
+      ? config.bridePhoto 
+      : `${baseUrl}${config.bridePhoto.replace(/^\.\//, '').replace(/^\//, '')}`;
+  }, [config.bridePhoto, baseUrl]);
+
+  const groomPhotoUrl = useMemo(() => {
+    if (!config.groomPhoto) return '';
+    return config.groomPhoto.startsWith('http') 
+      ? config.groomPhoto 
+      : `${baseUrl}${config.groomPhoto.replace(/^\.\//, '').replace(/^\//, '')}`;
+  }, [config.groomPhoto, baseUrl]);
+
   return (
     <div
       className="p-8 md:p-10 rounded-3xl text-center backdrop-blur-sm relative overflow-hidden"
@@ -7,6 +25,38 @@ export default function InvitationCard({ config, guest }) {
       <div className="absolute top-0 left-0 w-full h-1.5" style={{ backgroundColor: 'var(--primary)' }}></div>
 
       <p className="text-sm tracking-widest uppercase" style={{ color: 'var(--accent)' }}>We Are Getting Married</p>
+      
+      {/* Foto Pengantin */}
+      {(bridePhotoUrl || groomPhotoUrl) && (
+        <div className="flex justify-center items-center gap-4 my-6">
+          {bridePhotoUrl && (
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 shadow-lg"
+              style={{ borderColor: 'var(--primary-light)' }}
+            >
+              <img 
+                src={bridePhotoUrl} 
+                alt={config.bride} 
+                className="w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            </div>
+          )}
+          <div className="text-2xl text-pink-400">&</div>
+          {groomPhotoUrl && (
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 shadow-lg"
+              style={{ borderColor: 'var(--primary-light)' }}
+            >
+              <img 
+                src={groomPhotoUrl} 
+                alt={config.groom} 
+                className="w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            </div>
+          )}
+        </div>
+      )}
+
       <h1 className="text-5xl md:text-6xl font-bold my-4" style={{ fontFamily: 'var(--font-title)', color: 'var(--primary-dark)' }}>
         {config.bride} <span className="text-3xl">&</span> {config.groom}
       </h1>
