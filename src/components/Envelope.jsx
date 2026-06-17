@@ -9,7 +9,7 @@ export default function Envelope({ config, guest, children, onOpenInvitation }) 
   const handleOpen = () => {
     if (isOpen) return;
     setIsOpen(true);
-    if (config.envelopeSound && audioRef.current) {
+    if (config.envelopeSound && config.envelopeSound !== '' && audioRef.current) {
       audioRef.current.play().catch(() => {});
     }
     setTimeout(() => {
