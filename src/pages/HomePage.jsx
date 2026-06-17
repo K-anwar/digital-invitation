@@ -54,7 +54,7 @@ export default function HomePage() {
             <div className="w-20 h-20 rounded-full overflow-hidden border-2 shadow-md"
               style={{ borderColor: 'var(--primary-light)' }}
             >
-              <img src={bridePhotoUrl} alt={config.bride} className="w-full h-full object-cover" />
+              <img src={bridePhotoUrl} alt={config.bride} className="w-full h-full object-cover" loading="lazy" decoding="async" onError={(e) => { e.target.style.display = 'none'; }} />
             </div>
           )}
           <div className="text-xl text-pink-400">&</div>

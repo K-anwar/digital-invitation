@@ -25,15 +25,16 @@ export default function Gallery({ images }) {
         {processedImages.map((src, index) => (
           <div 
             key={index} 
-            className="rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105"
+            className="rounded-xl overflow-hidden shadow-md transition-transform hover:scale-105 aspect-square"
           >
             <img 
               src={src} 
               alt={`Moment ${index + 1}`} 
-              className="w-full h-40 object-cover" 
+              className="w-full h-full object-cover" 
               loading="lazy"
+              decoding="async"
               onError={(e) => { 
-                e.target.src = 'https://via.placeholder.com/400x300?text=No+Image'; 
+                e.target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="%23f0f0f0"><rect width="200" height="200"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23999">📷</text></svg>'; 
               }}
             />
           </div>

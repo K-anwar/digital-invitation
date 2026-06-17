@@ -6,10 +6,10 @@ import Gallery from '../components/Gallery';
 import MusicPlayer from '../components/MusicPlayer';
 import QRCodeGenerator from '../components/QRCodeGenerator';
 import LoveStory from '../components/LoveStory';
-import WishesWall from '../components/WishesWall';
 import ShareButton from '../components/ShareButton';
 import DressCode from '../components/DressCode';
 import SEO from '../components/SEO';
+import { lazy, Suspense } from 'react';
 
 export default function InvitationPage() {
   const { slug } = useParams();
@@ -17,6 +17,8 @@ export default function InvitationPage() {
   const guest = searchParams.get('guest') || 'Bapak/Ibu';
   const { config, loading, error } = useCustomerConfig(slug);
   const baseUrl = import.meta.env.BASE_URL;
+  const WishesWall = lazy(() => import('../components/WishesWall'));
+  const WeddingGift = lazy(() => import('../components/WeddingGift'));
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Memuat...</div>;
   if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">{error}</div>;
@@ -120,6 +122,12 @@ export default function InvitationPage() {
             Scan QR code ini saat tiba di lokasi
           </p>
         </div>
+
+        {config.weddingGift && (
+          <Suspense fallback={<div className="text-center">Memuat hadiah pernikahan...</div>}>
+            <WeddingGift giftConfig={config.weddingGift} />
+          </Suspense>
+        )}
 
         <div className="flex flex-col items-center gap-3">
           <Link

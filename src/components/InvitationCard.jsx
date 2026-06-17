@@ -37,6 +37,8 @@ export default function InvitationCard({ config, guest }) {
                 src={bridePhotoUrl} 
                 alt={config.bride} 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>

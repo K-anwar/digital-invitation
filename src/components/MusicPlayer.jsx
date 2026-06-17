@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function MusicPlayer({ src }) {
   const [playing, setPlaying] = useState(false);
@@ -13,8 +13,15 @@ export default function MusicPlayer({ src }) {
   useEffect(() => {
     if (audioSrc) {
       audioRef.current = new Audio(audioSrc);
-      audioRef.current.volume = 0.4;
+      audioRef.current.volume = 0.5;
       audioRef.current.loop = true;
+      
+      // Coba autoplay (mungkin diblokir browser)
+      audioRef.current.play().then(() => {
+        setPlaying(true);
+      }).catch(() => {
+        console.log('🎵 Klik tombol untuk memutar musik');
+      });
     }
     return () => {
       if (audioRef.current) {
@@ -39,9 +46,10 @@ export default function MusicPlayer({ src }) {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white text-xl hover:scale-110 transition-transform"
+      className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg text-white text-2xl hover:scale-110 transition-transform animate-bounce-slow"
       style={{ backgroundColor: playing ? 'var(--primary-dark)' : 'var(--primary)' }}
       aria-label="Toggle music"
+      title={playing ? 'Matikan musik' : 'Nyalakan musik'}
     >
       {playing ? '🎵' : '🔇'}
     </button>
