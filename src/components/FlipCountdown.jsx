@@ -15,30 +15,24 @@ function FlipUnit({ value, label }) {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="relative w-16 h-20 md:w-20 md:h-24">
-        {/* Background static number */}
         <div 
           className="absolute inset-0 rounded-xl flex items-center justify-center text-2xl md:text-4xl font-bold shadow-lg"
           style={{ 
-            backgroundColor: 'var(--bg-card)', 
-            color: 'var(--primary-dark)',
-            boxShadow: 'var(--shadow), inset 0 2px 4px rgba(0,0,0,0.1)',
+            background: 'var(--primary-gradient)',
+            color: 'white',
             fontFamily: 'var(--font-title)'
           }}
         >
           <span className="relative z-10">{String(value).padStart(2, '0')}</span>
-          
-          {/* Flip animation overlay */}
           {flip && (
             <div className="absolute inset-0 animate-flip rounded-xl" 
               style={{ 
-                backgroundColor: 'var(--primary-light)',
+                backgroundColor: 'rgba(255,255,255,0.3)',
                 transformOrigin: 'bottom',
               }}
             />
           )}
-          
-          {/* Center line */}
-          <div className="absolute inset-x-0 top-1/2 h-px bg-black/10 z-20" />
+          <div className="absolute inset-x-0 top-1/2 h-px bg-white/20 z-20" />
         </div>
       </div>
       <span 
@@ -81,12 +75,7 @@ export default function FlipCountdown({ targetDate }) {
 
   return (
     <div className="space-y-4">
-      <h3 
-        className="text-center text-2xl font-bold mb-6"
-        style={{ fontFamily: 'var(--font-title)', color: 'var(--primary-dark)' }}
-      >
-        Menuju Hari Bahagia
-      </h3>
+      <h3 className="section-title">Menuju Hari Bahagia</h3>
       <div className="flex justify-center gap-3 md:gap-5">
         {units.map((unit) => (
           <FlipUnit key={unit.label} value={unit.value} label={unit.label} />

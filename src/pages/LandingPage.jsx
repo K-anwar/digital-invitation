@@ -50,8 +50,14 @@ export default function LandingPage() {
                 className="px-8 py-4 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition shadow-lg text-lg">
                 💬 Pesan Sekarang
               </a>
-              <a href="#pricing"
-                className="px-8 py-4 bg-white text-pink-600 rounded-full font-semibold hover:shadow-lg transition border-2 border-pink-200 text-lg">
+              <a 
+                href="#pricing"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                className="px-8 py-4 bg-white text-pink-600 rounded-full font-semibold hover:shadow-lg transition border-2 border-pink-200 text-lg"
+              >
                 Lihat Paket
               </a>
             </div>

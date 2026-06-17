@@ -1,148 +1,403 @@
 /* ============================================
-   8 TEMA PREMIUM UNDANGAN PERNIKAHAN
+   8 TEMA PREMIUM - ENHANCED VERSION
+   Glassmorphism + Gradient + Animation
    ============================================ */
 
-/* === 1. TEMA ROMANTIS (DEFAULT) === */
+/* === BASE PREMIUM STYLES === */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-blur: blur(10px);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === 1. ROMANTIC === */
 :root,
 [data-theme="romantic"] {
-  --primary: #d4a0a0;
-  --primary-dark: #b56576;
-  --primary-light: #f2d5d5;
-  --accent: #c98b8b;
-  --bg: #fdf6f0;
-  --bg-card: rgba(255, 245, 238, 0.9);
-  --text: #4a3b3b;
-  --text-soft: #6b5b5b;
+  --primary: #c97b84;
+  --primary-dark: #9b5b63;
+  --primary-light: #f5e1e4;
+  --primary-gradient: linear-gradient(135deg, #c97b84 0%, #e8b4bc 100%);
+  --accent: #d4a5a5;
+  --accent-gradient: linear-gradient(135deg, #d4a5a5 0%, #e8c5c5 100%);
+  --bg: #fef8f5;
+  --bg-gradient: linear-gradient(135deg, #fef8f5 0%, #fdf0ea 50%, #fef8f5 100%);
+  --bg-card: rgba(255, 248, 245, 0.7);
+  --bg-card-hover: rgba(255, 248, 245, 0.85);
+  --text: #4a3535;
+  --text-soft: #7a6565;
+  --text-light: #a09090;
   --font-title: 'Playfair Display', serif;
   --font-body: 'Raleway', sans-serif;
-  --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  --radius: 24px;
-  --border-style: dashed;
+  --shadow-sm: 0 2px 8px rgba(201, 123, 132, 0.08);
+  --shadow: 0 8px 32px rgba(201, 123, 132, 0.12);
+  --shadow-lg: 0 16px 48px rgba(201, 123, 132, 0.18);
+  --shadow-glow: 0 0 40px rgba(201, 123, 132, 0.15);
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(201, 123, 132, 0.2);
   --ornament: '🌸';
+  --ornament-2: '💮';
+  --divider-gradient: linear-gradient(90deg, transparent, #c97b84, transparent);
 }
 
-/* === 2. TEMA ELEGAN === */
+/* === 2. ELEGANT === */
 [data-theme="elegant"] {
-  --primary: #9b2226;
-  --primary-dark: #6a040f;
-  --primary-light: #f8d7da;
-  --accent: #b23b3b;
-  --bg: #fff5f5;
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --text: #3e2723;
-  --text-soft: #5d4037;
+  --primary: #8b1a1a;
+  --primary-dark: #5c0000;
+  --primary-light: #f0d0d0;
+  --primary-gradient: linear-gradient(135deg, #8b1a1a 0%, #c23b3b 100%);
+  --accent: #c9a84c;
+  --accent-gradient: linear-gradient(135deg, #c9a84c 0%, #e8d48b 100%);
+  --bg: #fefafa;
+  --bg-gradient: linear-gradient(135deg, #fefafa 0%, #fdf5f5 50%, #fefafa 100%);
+  --bg-card: rgba(254, 250, 250, 0.75);
+  --bg-card-hover: rgba(254, 250, 250, 0.9);
+  --text: #2a1515;
+  --text-soft: #5a3535;
+  --text-light: #8a6060;
   --font-title: 'Cormorant Garamond', serif;
   --font-body: 'Montserrat', sans-serif;
-  --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 2px 8px rgba(139, 26, 26, 0.1);
+  --shadow: 0 8px 32px rgba(139, 26, 26, 0.15);
+  --shadow-lg: 0 16px 48px rgba(139, 26, 26, 0.2);
+  --shadow-glow: 0 0 40px rgba(201, 168, 76, 0.2);
+  --radius-sm: 8px;
   --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
   --border-style: solid;
+  --border-width: 2px;
+  --border-color: rgba(201, 168, 76, 0.3);
   --ornament: '🌹';
+  --ornament-2: '🥂';
+  --divider-gradient: linear-gradient(90deg, transparent, #c9a84c, transparent);
 }
 
-/* === 3. TEMA ISLAMI (GREEN & GOLD) === */
+/* === 3. ISLAMI === */
 [data-theme="islami"] {
-  --primary: #1b5e20;
-  --primary-dark: #0d3b0f;
-  --primary-light: #c8e6c9;
-  --accent: #d4a853;
-  --bg: #fafdf6;
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --text: #2e3b2e;
-  --text-soft: #5a6b5a;
+  --primary: #1a6b3c;
+  --primary-dark: #0d3b1f;
+  --primary-light: #d4ede0;
+  --primary-gradient: linear-gradient(135deg, #1a6b3c 0%, #2d9d5a 100%);
+  --accent: #c49b2a;
+  --accent-gradient: linear-gradient(135deg, #c49b2a 0%, #e8c84c 100%);
+  --bg: #fafef9;
+  --bg-gradient: linear-gradient(135deg, #fafef9 0%, #f5fcf5 50%, #fafef9 100%);
+  --bg-card: rgba(250, 254, 249, 0.7);
+  --bg-card-hover: rgba(250, 254, 249, 0.85);
+  --text: #1a2e1a;
+  --text-soft: #3a5a3a;
+  --text-light: #6a8a6a;
   --font-title: 'Amiri', serif;
   --font-body: 'Poppins', sans-serif;
-  --shadow: 0 15px 30px rgba(27, 94, 32, 0.1);
-  --radius: 20px;
+  --shadow-sm: 0 2px 8px rgba(26, 107, 60, 0.08);
+  --shadow: 0 8px 32px rgba(26, 107, 60, 0.12);
+  --shadow-lg: 0 16px 48px rgba(26, 107, 60, 0.18);
+  --shadow-glow: 0 0 40px rgba(196, 155, 42, 0.15);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --radius-xl: 34px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(196, 155, 42, 0.25);
   --ornament: '☪️';
+  --ornament-2: '🕌';
+  --divider-gradient: linear-gradient(90deg, transparent, #c49b2a, transparent);
 }
 
-/* === 4. TEMA PASTEL === */
+/* === 4. PASTEL === */
 [data-theme="pastel"] {
-  --primary: #b8c9d4;
-  --primary-dark: #8fa3b3;
-  --primary-light: #e3ecf2;
+  --primary: #8da9c4;
+  --primary-dark: #5a7d9a;
+  --primary-light: #e0eaf2;
+  --primary-gradient: linear-gradient(135deg, #8da9c4 0%, #b8c9d4 100%);
   --accent: #c4a3a3;
-  --bg: #faf9f6;
-  --bg-card: rgba(255, 255, 255, 0.9);
-  --text: #2c3e4e;
-  --text-soft: #5a6c7d;
+  --accent-gradient: linear-gradient(135deg, #c4a3a3 0%, #d4b8b8 100%);
+  --bg: #f9fafc;
+  --bg-gradient: linear-gradient(135deg, #f9fafc 0%, #f5f7fa 50%, #f9fafc 100%);
+  --bg-card: rgba(249, 250, 252, 0.65);
+  --bg-card-hover: rgba(249, 250, 252, 0.8);
+  --text: #2a3a4a;
+  --text-soft: #4a5a6a;
+  --text-light: #7a8a9a;
   --font-title: 'Lora', serif;
   --font-body: 'Quicksand', sans-serif;
-  --shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
-  --radius: 28px;
+  --shadow-sm: 0 2px 8px rgba(141, 169, 196, 0.06);
+  --shadow: 0 8px 32px rgba(141, 169, 196, 0.1);
+  --shadow-lg: 0 16px 48px rgba(141, 169, 196, 0.15);
+  --shadow-glow: 0 0 40px rgba(141, 169, 196, 0.12);
+  --radius-sm: 14px;
+  --radius: 22px;
+  --radius-lg: 30px;
+  --radius-xl: 38px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(141, 169, 196, 0.2);
   --ornament: '🕊️';
+  --ornament-2: '🦋';
+  --divider-gradient: linear-gradient(90deg, transparent, #8da9c4, transparent);
 }
 
-/* === 5. TEMA RUSTIC (EARTHY) === */
+/* === 5. RUSTIC === */
 [data-theme="rustic"] {
   --primary: #8b6914;
   --primary-dark: #5c4408;
   --primary-light: #f5e6c8;
+  --primary-gradient: linear-gradient(135deg, #8b6914 0%, #b8952a 100%);
   --accent: #c4975a;
-  --bg: #fef9f0;
-  --bg-card: rgba(255, 250, 240, 0.95);
-  --text: #4a3525;
-  --text-soft: #6b5540;
+  --accent-gradient: linear-gradient(135deg, #c4975a 0%, #d4a76a 100%);
+  --bg: #fdfaf5;
+  --bg-gradient: linear-gradient(135deg, #fdfaf5 0%, #faf5ea 50%, #fdfaf5 100%);
+  --bg-card: rgba(253, 250, 245, 0.7);
+  --bg-card-hover: rgba(253, 250, 245, 0.85);
+  --text: #3a2a1a;
+  --text-soft: #5a4a3a;
+  --text-light: #8a7a6a;
   --font-title: 'Lora', serif;
   --font-body: 'Open Sans', sans-serif;
-  --shadow: 0 20px 40px rgba(139, 105, 20, 0.1);
-  --radius: 12px;
+  --shadow-sm: 0 2px 8px rgba(139, 105, 20, 0.08);
+  --shadow: 0 8px 32px rgba(139, 105, 20, 0.12);
+  --shadow-lg: 0 16px 48px rgba(139, 105, 20, 0.18);
+  --shadow-glow: 0 0 40px rgba(196, 151, 90, 0.15);
+  --radius-sm: 6px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(139, 105, 20, 0.25);
   --ornament: '🌿';
+  --ornament-2: '🍂';
+  --divider-gradient: linear-gradient(90deg, transparent, #8b6914, transparent);
 }
 
-/* === 6. TEMA GLAMOUR (BLACK & GOLD) === */
+/* === 6. GLAMOUR === */
 [data-theme="glamour"] {
   --primary: #c9a84c;
   --primary-dark: #8b7329;
-  --primary-light: #f8f0d5;
+  --primary-light: #3a3a2a;
+  --primary-gradient: linear-gradient(135deg, #c9a84c 0%, #e8d48b 100%);
   --accent: #d4af37;
+  --accent-gradient: linear-gradient(135deg, #d4af37 0%, #f0d060 100%);
   --bg: #1a1a1a;
-  --bg-card: rgba(30, 30, 30, 0.95);
+  --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1a1a 100%);
+  --bg-card: rgba(30, 30, 30, 0.8);
+  --bg-card-hover: rgba(40, 40, 40, 0.9);
   --text: #f0e6d3;
   --text-soft: #c0b090;
+  --text-light: #908060;
   --font-title: 'Playfair Display', serif;
   --font-body: 'Raleway', sans-serif;
-  --shadow: 0 20px 40px rgba(201, 168, 76, 0.15);
-  --radius: 8px;
+  --shadow-sm: 0 2px 8px rgba(201, 168, 76, 0.1);
+  --shadow: 0 8px 32px rgba(201, 168, 76, 0.15);
+  --shadow-lg: 0 16px 48px rgba(201, 168, 76, 0.2);
+  --shadow-glow: 0 0 60px rgba(201, 168, 76, 0.25);
+  --radius-sm: 4px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(201, 168, 76, 0.3);
   --ornament: '✨';
+  --ornament-2: '💫';
+  --divider-gradient: linear-gradient(90deg, transparent, #c9a84c, transparent);
 }
 
-/* === 7. TEMA MINIMALIS === */
+/* === 7. MINIMALIS === */
 [data-theme="minimalis"] {
   --primary: #6b7280;
   --primary-dark: #374151;
   --primary-light: #e5e7eb;
+  --primary-gradient: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
   --accent: #9ca3af;
+  --accent-gradient: linear-gradient(135deg, #9ca3af 0%, #b0b7c3 100%);
   --bg: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.98);
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f9fafb 50%, #ffffff 100%);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
   --text: #1f2937;
   --text-soft: #6b7280;
+  --text-light: #9ca3af;
   --font-title: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  --radius: 4px;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-glow: none;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(0, 0, 0, 0.08);
   --ornament: '🤍';
+  --ornament-2: '◻️';
+  --divider-gradient: linear-gradient(90deg, transparent, #e5e7eb, transparent);
 }
 
-/* === 8. TEMA TROPICAL === */
+/* === 8. TROPICAL === */
 [data-theme="tropical"] {
   --primary: #e85d75;
   --primary-dark: #c0392b;
   --primary-light: #fce4e8;
+  --primary-gradient: linear-gradient(135deg, #e85d75 0%, #f08090 100%);
   --accent: #f39c12;
+  --accent-gradient: linear-gradient(135deg, #f39c12 0%, #f5b041 100%);
   --bg: #fffaf5;
-  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-gradient: linear-gradient(135deg, #fffaf5 0%, #fff5ee 50%, #fffaf5 100%);
+  --bg-card: rgba(255, 250, 245, 0.65);
+  --bg-card-hover: rgba(255, 250, 245, 0.8);
   --text: #2c3e50;
   --text-soft: #5d6d7e;
+  --text-light: #8d9dae;
   --font-title: 'Pacifico', cursive;
   --font-body: 'Nunito', sans-serif;
-  --shadow: 0 15px 30px rgba(232, 93, 117, 0.12);
-  --radius: 32px;
+  --shadow-sm: 0 2px 8px rgba(232, 93, 117, 0.06);
+  --shadow: 0 8px 32px rgba(232, 93, 117, 0.1);
+  --shadow-lg: 0 16px 48px rgba(232, 93, 117, 0.15);
+  --shadow-glow: 0 0 40px rgba(232, 93, 117, 0.12);
+  --radius-sm: 16px;
+  --radius: 24px;
+  --radius-lg: 32px;
+  --radius-xl: 40px;
   --border-style: solid;
+  --border-width: 1px;
+  --border-color: rgba(232, 93, 117, 0.2);
   --ornament: '🌺';
+  --ornament-2: '🌴';
+  --divider-gradient: linear-gradient(90deg, transparent, #e85d75, transparent);
+}
+
+/* === GLOBAL PREMIUM ANIMATIONS === */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 123, 132, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(201, 123, 132, 0.4); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes border-glow {
+  0%, 100% { border-color: var(--border-color); }
+  50% { border-color: var(--primary); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* === GLASSMORPHISM CARD === */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--border-width) var(--border-style) var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* === GRADIENT TEXT === */
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === DIVIDER === */
+.premium-divider {
+  height: 2px;
+  background: var(--divider-gradient);
+  border: none;
+  margin: 2rem 0;
+}
+
+/* === BUTTON PREMIUM === */
+.btn-premium {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.btn-premium:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  color: white;
+}
+
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.btn-premium:hover::after {
+  transform: translateX(100%);
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

@@ -5,19 +5,28 @@ import InvitationPage from './pages/InvitationPage';
 import RSVPPage from './pages/RSVPPage';
 import CheckinPage from './pages/CheckinPage';
 import LandingPage from './pages/LandingPage';
-import AdminPage from './pages/AdminPage'; // ← Tambahkan
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
     <HashRouter>
       <Analytics />
       <Routes>
+        {/* Landing page */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/:slug" element={<HomePage />} />
+        
+        {/* Admin dashboard */}
+        <Route path="/:slug/admin" element={<AdminPage />} />
+        
+        {/* Halaman undangan spesifik */}
         <Route path="/:slug/invitation" element={<InvitationPage />} />
         <Route path="/:slug/rsvp" element={<RSVPPage />} />
         <Route path="/:slug/checkin" element={<CheckinPage />} />
-        <Route path="/:slug/admin" element={<AdminPage />} /> {/* ← Tambahkan */}
+        
+        {/* Halaman amplop */}
+        <Route path="/:slug" element={<HomePage />} />
+        
+        {/* Redirect ke landing */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </HashRouter>
