@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
 export default function SEO({ 
-  title = 'Undangan Pernikahan Digital',
-  description = 'Undangan pernikahan digital elegan dengan RSVP dan QR check-in',
+  title = 'Undangan Pernikahan Digital Premium',
+  description = 'Undangan pernikahan digital elegan dengan RSVP, QR check-in, galeri foto, dan musik. Tersedia multi tema.',
   image = '',
-  url = ''
+  url = '',
+  keywords = 'undangan pernikahan, wedding invitation, undangan digital, pernikahan, wedding',
+  author = 'Digital Wedding Invitation'
 }) {
   useEffect(() => {
     // Update title
@@ -12,39 +14,51 @@ export default function SEO({
       document.title = title;
     }
     
-    // Helper function to set meta tags
-    const setMetaTag = (property, content) => {
-      if (!content) return;
+    // Helper function to set or update meta tags
+    const setMetaTag = (attr, value, attrName = 'name') => {
+      if (!value) return;
       
-      let element = document.querySelector(`meta[property="${property}"]`) || 
-                    document.querySelector(`meta[name="${property}"]`);
+      const selector = attrName === 'property' 
+        ? `meta[property="${attr}"]` 
+        : `meta[name="${attr}"]`;
+      
+      let element = document.querySelector(selector);
       
       if (!element) {
         element = document.createElement('meta');
-        if (property.startsWith('og:') || property.startsWith('twitter:')) {
-          element.setAttribute('property', property);
-        } else {
-          element.setAttribute('name', property);
-        }
+        element.setAttribute(attrName, attr);
         document.head.appendChild(element);
       }
       
-      element.setAttribute('content', content);
+      element.setAttribute('content', value);
     };
 
-    // Set meta tags
+    // Basic Meta
     setMetaTag('description', description);
-    setMetaTag('og:title', title);
-    setMetaTag('og:description', description);
-    setMetaTag('og:image', image);
-    setMetaTag('og:url', url || window.location.href);
-    setMetaTag('og:type', 'website');
-    setMetaTag('twitter:card', 'summary_large_image');
-    setMetaTag('twitter:title', title);
-    setMetaTag('twitter:description', description);
-    setMetaTag('twitter:image', image);
+    setMetaTag('keywords', keywords);
+    setMetaTag('author', author);
+    setMetaTag('robots', 'index, follow');
+    setMetaTag('viewport', 'width=device-width, initial-scale=1.0');
+    
+    // Open Graph (Facebook, LinkedIn)
+    setMetaTag('og:title', title, 'property');
+    setMetaTag('og:description', description, 'property');
+    setMetaTag('og:image', image, 'property');
+    setMetaTag('og:url', url || window.location.href, 'property');
+    setMetaTag('og:type', 'website', 'property');
+    setMetaTag('og:site_name', 'Digital Wedding Invitation', 'property');
+    setMetaTag('og:locale', 'id_ID', 'property');
+    
+    // Twitter Card
+    setMetaTag('twitter:card', 'summary_large_image', 'property');
+    setMetaTag('twitter:title', title, 'property');
+    setMetaTag('twitter:description', description, 'property');
+    setMetaTag('twitter:image', image, 'property');
+    
+    // Additional
+    setMetaTag('theme-color', '#d4a0a0');
 
-  }, [title, description, image, url]);
+  }, [title, description, image, url, keywords, author]);
 
-  return null; // This component doesn't render anything
+  return null;
 }

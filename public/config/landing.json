@@ -1,0 +1,144 @@
+{
+  "slug": "landing",
+  "brandName": "Digital Wedding Invitation",
+  "tagline": "Undangan Pernikahan Digital Premium & Elegan",
+  "description": "Buat undangan pernikahan digital yang elegan, interaktif, dan mudah dibagikan. Dilengkapi RSVP, QR check-in, galeri foto, musik, dan multi tema.",
+  "heroImage": "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200",
+  "features": [
+    {
+      "icon": "💌",
+      "title": "Amplop Digital",
+      "description": "Animasi amplop pembuka yang elegan dan romantis"
+    },
+    {
+      "icon": "📱",
+      "title": "Mobile Friendly",
+      "description": "Tampilan responsif di semua perangkat"
+    },
+    {
+      "icon": "🎨",
+      "title": "Multi Tema",
+      "description": "3 tema premium: Romantic, Elegant, Pastel"
+    },
+    {
+      "icon": "📝",
+      "title": "RSVP & Check-in",
+      "description": "Form konfirmasi kehadiran + QR code check-in"
+    },
+    {
+      "icon": "📍",
+      "title": "Google Maps",
+      "description": "Peta lokasi akad dan resepsi"
+    },
+    {
+      "icon": "🎵",
+      "title": "Musik Latar",
+      "description": "Musik romantis yang bisa diatur tamu"
+    },
+    {
+      "icon": "💬",
+      "title": "Share WhatsApp",
+      "description": "Bagikan undangan langsung ke WhatsApp"
+    },
+    {
+      "icon": "📊",
+      "title": "Analytics",
+      "description": "Pantau jumlah pengunjung undangan"
+    }
+  ],
+  "pricing": [
+    {
+      "name": "Basic",
+      "price": "Rp 150.000",
+      "color": "#b8c9d4",
+      "features": [
+        "1 Tema Pilihan",
+        "RSVP Form",
+        "QR Check-in",
+        "Google Maps",
+        "Galeri 6 Foto",
+        "Musik Latar",
+        "Link Custom (nama tamu)",
+        "Support 7 hari"
+      ]
+    },
+    {
+      "name": "Premium",
+      "price": "Rp 350.000",
+      "color": "#d4a0a0",
+      "popular": true,
+      "features": [
+        "3 Tema Pilihan",
+        "Semua fitur Basic",
+        "Love Story Timeline",
+        "Wishes Wall",
+        "Amplop Digital",
+        "Share WhatsApp Button",
+        "Google Analytics",
+        "Support 30 hari",
+        "Revisi 1x"
+      ]
+    },
+    {
+      "name": "Exclusive",
+      "price": "Rp 500.000",
+      "color": "#9b2226",
+      "features": [
+        "Unlimited Tema",
+        "Semua fitur Premium",
+        "Custom Domain",
+        "Foto & Musik Kustom",
+        "Priority Support",
+        "Revisi 3x",
+        "Backup Data RSVP",
+        "SEO Optimization"
+      ]
+    }
+  ],
+  "howToOrder": [
+    {
+      "step": 1,
+      "title": "Pilih Paket",
+      "description": "Pilih paket yang sesuai dengan kebutuhan Anda"
+    },
+    {
+      "step": 2,
+      "title": "Hubungi Kami",
+      "description": "Kirim detail acara melalui WhatsApp"
+    },
+    {
+      "step": 3,
+      "title": "Kirim Data",
+      "description": "Kirim foto, musik, dan data acara Anda"
+    },
+    {
+      "step": 4,
+      "title": "Review & Revisi",
+      "description": "Kami buat undangan dalam 1-3 hari kerja"
+    },
+    {
+      "step": 5,
+      "title": "Go Live!",
+      "description": "Undangan siap dibagikan ke tamu"
+    }
+  ],
+  "contact": {
+    "whatsapp": "62895384947265",
+    "instagram": "rizza_lutfi",
+    "email": "anwaralrasyd@gmail.com"
+  },
+  "testimonials": [
+    {
+      "name": "Rizza & Anwar",
+      "role": "Pengantin",
+      "message": "Undangannya sangat elegan! Tamu-tamu pada suka dengan fitur QR check-in. Terima kasih! 💕",
+      "rating": 5
+    },
+    {
+      "name": "Dina & Andi",
+      "role": "Pengantin",
+      "message": "Proses ordernya mudah, hasilnya premium. Recommended banget! 🎉",
+      "rating": 5
+    }
+  ]
+}
