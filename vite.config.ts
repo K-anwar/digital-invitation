@@ -21,11 +21,11 @@ export default defineConfig({
     },
     target: 'es2020',
     sourcemap: false,
+    // Tambahkan ini untuk mencegah cache issues
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Vendor utama (React, React Router, dll)
             if (
               id.includes('react') ||
               id.includes('react-dom') ||
@@ -33,7 +33,6 @@ export default defineConfig({
             ) {
               return 'vendor';
             }
-            // UI library
             if (
               id.includes('aos') ||
               id.includes('qrcode') ||
@@ -41,10 +40,13 @@ export default defineConfig({
             ) {
               return 'ui';
             }
-            // Default untuk node_modules lain
             return 'vendor';
           }
         },
+        // Tambahkan hash pada chunk names untuk cache busting
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
