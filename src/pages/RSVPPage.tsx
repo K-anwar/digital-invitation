@@ -1,8 +1,8 @@
 import { useParams, useSearchParams } from 'react-router-dom';
 import useCustomerConfig from '@/hooks/useCustomerConfig';
-import RSVPForm from '@/components/RSVPForm';
-import Ornament from '@/components/Ornament';
-import LoadingScreen from '@/components/LoadingScreen';
+import RSVPForm from '@/components/forms/RSVPForm';
+import Ornament from '@/components/common/Ornament';
+import LoadingScreen from '@/components/common/LoadingScreen';
 
 export default function RSVPPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -14,13 +14,10 @@ export default function RSVPPage() {
   if (error || !config) return <div className="min-h-screen flex items-center justify-center text-red-500">{error || 'Undangan tidak ditemukan'}</div>;
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4 py-12 relative"
-      style={{ backgroundColor: 'var(--bg)' }}
-    >
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative" style={{ backgroundColor: 'var(--bg)' }}>
       <Ornament />
       <div className="w-full max-w-md relative z-10">
-        <RSVPForm guest={guest} slug={slug || ''} googleScriptUrl={config.googleScriptUrl} />
+        <RSVPForm guest={guest} slug={slug || ''} />
       </div>
     </div>
   );

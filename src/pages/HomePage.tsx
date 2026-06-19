@@ -1,8 +1,8 @@
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useMemo } from 'react';
 import useCustomerConfig from '@/hooks/useCustomerConfig';
-import Envelope from '@/components/Envelope';
-import LoadingScreen from '@/components/LoadingScreen';
+import Envelope from '@/components/invitation/Envelope';
+import LoadingScreen from '@/components/common/LoadingScreen';
 
 export default function HomePage() {
   const { slug } = useParams<{ slug: string }>();

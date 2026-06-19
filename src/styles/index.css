@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@import "./themes/index.css";
+
+/* Animasi flip untuk countdown */
+@keyframes flip {
+  0% { transform: rotateX(0deg); }
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg); }
+}
+.animate-flip { animation: flip 0.3s ease-in-out; }
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Bounce slow untuk tombol musik */
+@keyframes bounce-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+
+/* Responsive fixes */
+@media (min-width: 640px) { .container-sm { max-width: 640px; margin: 0 auto; } }
+@media (min-width: 768px) { .container-md { max-width: 768px; margin: 0 auto; } }
+@media (min-width: 1024px) { .container-lg { max-width: 1024px; margin: 0 auto; } }
+
+/* Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.skip-link { position: absolute; top: -100%; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 8px; z-index: 1000; }
+.skip-link:focus { top: 0; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+* { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
+
+/* Utility */
+.text-balance { text-wrap: balance; }
+.break-words { word-wrap: break-word; overflow-wrap: break-word; }
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1, .h1 { font-size: 2rem !important; }
+  h2, .h2 { font-size: 1.75rem !important; }
+  h3, .h3 { font-size: 1.5rem !important; }
+  h4, .h4 { font-size: 1.25rem !important; }
+}
+
+/* ============================================
+   CUSTOM ANIMATIONS & SCROLLBAR
+   ============================================ */
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Custom Scrollbar untuk Guest Book */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Animation Delay Utilities */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Bounce Slow - sudah ada, kita pertahankan */
+@keyframes bounce-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}

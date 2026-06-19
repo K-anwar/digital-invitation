@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, memo, ReactNode } from 'react';
-import Confetti from './Confetti';
-import Ornament from './Ornament';
+import Confetti from '@/components/common/Confetti';
+import Ornament from '@/components/common/Ornament';
 import { WeddingConfig } from '@/types';
 
 interface EnvelopeProps {

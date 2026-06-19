@@ -5,7 +5,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/digital-invitation/',
+  base: '/digital-invitation/', // GitHub Pages repo name
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -21,32 +21,21 @@ export default defineConfig({
     },
     target: 'es2020',
     sourcemap: false,
-    // Tambahkan ini untuk mencegah cache issues
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (
-              id.includes('react') ||
-              id.includes('react-dom') ||
-              id.includes('react-router-dom')
-            ) {
-              return 'vendor';
+            if (id.includes('firebase')) return 'firebase';
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'react-vendor';
             }
-            if (
-              id.includes('aos') ||
-              id.includes('qrcode') ||
-              id.includes('react-helmet')
-            ) {
-              return 'ui';
+            if (id.includes('aos') || id.includes('qrcode') || id.includes('react-helmet')) {
+              return 'ui-libs';
             }
             return 'vendor';
           }
         },
-        // Tambahkan hash pada chunk names untuk cache busting
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
