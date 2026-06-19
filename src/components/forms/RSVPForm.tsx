@@ -11,7 +11,6 @@ type AttendingOption = 'yes' | 'no';
 export default function RSVPForm({ guest, slug }: RSVPFormProps) {
   const [attending, setAttending] = useState<AttendingOption>('yes');
   const [pax, setPax] = useState<number>(1);
-  const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -34,7 +33,7 @@ export default function RSVPForm({ guest, slug }: RSVPFormProps) {
         guestName: guest,
         attending,
         pax: attending === 'yes' ? pax : 0,
-        message: message.trim(),
+        message: '', // tidak ada input pesan
         slug,
       });
       setSubmitted(true);
@@ -98,19 +97,6 @@ export default function RSVPForm({ guest, slug }: RSVPFormProps) {
           />
         </div>
       )}
-
-      <div>
-        <label htmlFor="message" className="block mb-2 font-medium text-sm md:text-base">Ucapan & Doa</label>
-        <textarea
-          id="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows={4}
-          className="w-full p-3 rounded-lg border focus:ring-2 focus:outline-none text-sm md:text-base"
-          style={{ borderColor: 'var(--primary-light)', backgroundColor: 'white' }}
-          placeholder="Tulis ucapan selamat untuk kedua mempelai..."
-        />
-      </div>
 
       {error && <div role="alert" className="text-red-500 text-sm">{error}</div>}
 

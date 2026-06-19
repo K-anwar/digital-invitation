@@ -48,6 +48,7 @@ export default function GuestBookForm({ slug, onSuccess }: GuestBookFormProps) {
         required
       />
       {error && <p className="text-red-500 text-sm">{error}</p>}
+      <div className="flex justify-center">
       <button
         type="submit"
         disabled={loading}
@@ -55,6 +56,7 @@ export default function GuestBookForm({ slug, onSuccess }: GuestBookFormProps) {
       >
         {loading ? '⏳ Mengirim...' : 'Kirim Ucapan'}
       </button>
+      </div>
     </form>
   );
 }
