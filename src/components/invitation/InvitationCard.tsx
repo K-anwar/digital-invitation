@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import type { WeddingConfig } from '@/types';
+import { getMediaUrl, getCloudinaryThumbnail } from '@/utils/imageHelper';
 
 interface InvitationCardProps {
   config: WeddingConfig;
@@ -8,22 +9,20 @@ interface InvitationCardProps {
 
 export default function InvitationCard({ config, guest }: InvitationCardProps) {
   const baseUrl = import.meta.env.BASE_URL || '/';
-  const layout = config?.layout || 'classic';
 
   const bridePhotoUrl = useMemo(() => {
     if (!config.bridePhoto) return '';
-    return config.bridePhoto.startsWith('http')
-      ? config.bridePhoto
-      : `${baseUrl}${config.bridePhoto.replace(/^\.\//, '').replace(/^\//, '')}`;
+    const url = getMediaUrl(config.bridePhoto, baseUrl);
+    return getCloudinaryThumbnail(url, 300, 300);
   }, [config.bridePhoto, baseUrl]);
 
   const groomPhotoUrl = useMemo(() => {
     if (!config.groomPhoto) return '';
-    return config.groomPhoto.startsWith('http')
-      ? config.groomPhoto
-      : `${baseUrl}${config.groomPhoto.replace(/^\.\//, '').replace(/^\//, '')}`;
+    const url = getMediaUrl(config.groomPhoto, baseUrl);
+    return getCloudinaryThumbnail(url, 300, 300);
   }, [config.groomPhoto, baseUrl]);
 
+  // Helper format tanggal
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
     const date = new Date(dateStr);
@@ -50,34 +49,10 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
   const resepsiDate = config.resepsiDate || config.eventDate;
   const isAkadDifferent = config.akadDate && config.akadDate !== config.eventDate;
   const isResepsiDifferent = config.resepsiDate && config.resepsiDate !== config.eventDate;
-  const isAkadAndResepsiDifferent = config.akadDate && config.resepsiDate && config.akadDate !== config.resepsiDate;
-
-  // Varian card berdasarkan layout
-  const getCardClasses = () => {
-    const base = 'p-6 md:p-10 text-center relative overflow-hidden glass-card';
-    switch (layout) {
-      case 'classic':
-        return `${base} border-4 border-double border-primary/20 rounded-3xl`;
-      case 'minimal':
-        return `${base} border-0 shadow-sm rounded-xl`;
-      case 'elegant':
-        return `${base} border-2 rounded-2xl shadow-gold`;
-      case 'tropical':
-        return `${base} border-2 border-primary/30 rounded-3xl`;
-      case 'luxury':
-        return `${base} border-2 border-accent rounded-2xl shadow-2xl`;
-      case 'boho':
-        return `${base} border-2 border-dashed rounded-3xl`;
-      case 'simple':
-        return `${base} border-0 rounded-lg shadow-sm`;
-      default:
-        return `${base} rounded-2xl`;
-    }
-  };
 
   return (
     <div
-      className={getCardClasses()}
+      className="p-6 md:p-10 text-center relative overflow-hidden glass-card"
       style={{ borderRadius: 'var(--radius-lg)' }}
       role="article"
       aria-label="Kartu undangan pernikahan"
@@ -145,6 +120,7 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
       <hr className="premium-divider" />
 
       <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        {/* Akad */}
         <div className="text-center">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
             Akad Nikah
@@ -155,13 +131,14 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
           <p className="text-sm mt-1" style={{ color: 'var(--text-soft)' }}>
             Pukul {formatTime(akadDate)}
           </p>
-          {(isAkadDifferent || isAkadAndResepsiDifferent) && (
+          {isAkadDifferent && (
             <p className="text-xs mt-1 opacity-60" style={{ color: 'var(--text-light)' }}>
               *Berbeda dengan resepsi
             </p>
           )}
         </div>
 
+        {/* Resepsi */}
         <div className="text-center">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
             Resepsi
@@ -172,7 +149,7 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
           <p className="text-sm mt-1" style={{ color: 'var(--text-soft)' }}>
             Pukul {formatTime(resepsiDate)}
           </p>
-          {(isResepsiDifferent || isAkadAndResepsiDifferent) && (
+          {isResepsiDifferent && (
             <p className="text-xs mt-1 opacity-60" style={{ color: 'var(--text-light)' }}>
               *Berbeda dengan akad
             </p>

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { WeddingConfig } from '@/types';
 import ClassicLayout from './ClassicLayout';
 import ModernLayout from './ModernLayout';
@@ -17,7 +17,7 @@ interface LayoutSelectorProps {
 export default function LayoutSelector({ children, config }: LayoutSelectorProps) {
   const layout = config?.layout || 'classic';
 
-  const layouts: Record<string, React.ComponentType<LayoutSelectorProps>> = {
+  const layouts: Record<string, React.ComponentType<{ children: ReactNode; config: WeddingConfig }>> = {
     classic: ClassicLayout,
     modern: ModernLayout,
     minimal: MinimalLayout,
@@ -29,11 +29,11 @@ export default function LayoutSelector({ children, config }: LayoutSelectorProps
   };
 
   const SelectedLayout = layouts[layout] || ClassicLayout;
-  
-  // Set data-layout di HTML
-  if (typeof document !== 'undefined') {
+
+  // Set data-layout di HTML untuk styling berbasis layout
+  useEffect(() => {
     document.documentElement.setAttribute('data-layout', layout);
-  }
+  }, [layout]);
 
   return <SelectedLayout config={config}>{children}</SelectedLayout>;
 }

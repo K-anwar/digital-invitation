@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
+import { getMediaUrl } from '@/utils/imageHelper';
 
 interface MusicPlayerProps {
   src?: string;
@@ -10,9 +11,7 @@ function MusicPlayer({ src }: MusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const baseUrl = import.meta.env.BASE_URL || '/';
 
-  const audioSrc = src?.startsWith('http')
-    ? src
-    : `${baseUrl}${src?.replace(/^\.\//, '').replace(/^\//, '') || ''}`;
+  const audioSrc = src ? getMediaUrl(src, baseUrl) : null;
 
   useEffect(() => {
     if (!audioSrc) return;
@@ -22,10 +21,7 @@ function MusicPlayer({ src }: MusicPlayerProps) {
     audio.addEventListener('error', () => setError(true));
     audioRef.current = audio;
 
-    // Play otomatis dengan penanganan error
-    audio.play().then(() => setPlaying(true)).catch(() => {
-      // Autoplay diblokir, tidak perlu error
-    });
+    audio.play().then(() => setPlaying(true)).catch(() => {});
 
     return () => {
       audio.pause();
@@ -44,17 +40,17 @@ function MusicPlayer({ src }: MusicPlayerProps) {
     setPlaying(!playing);
   };
 
-  if (!audioSrc || error) return null;
+  if (!audioSrc) return null;
 
   return (
     <button
       onClick={toggle}
       className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg text-white text-2xl hover:scale-110 transition-transform animate-bounce-slow"
-      style={{ backgroundColor: playing ? 'var(--primary-dark)' : 'var(--primary)' }}
+      style={{ backgroundColor: error ? '#888' : (playing ? 'var(--primary-dark)' : 'var(--primary)') }}
       aria-label={playing ? 'Matikan musik' : 'Nyalakan musik'}
       title={playing ? 'Matikan musik' : 'Nyalakan musik'}
     >
-      {playing ? '🎵' : '🔇'}
+      {error ? '🔇' : (playing ? '🎵' : '🔇')}
     </button>
   );
 }

@@ -2,6 +2,7 @@ export interface WeddingConfig {
   slug?: string;
   bride: string;
   groom: string;
+  eventType?: string;
   eventDate: string; 
   akadDate?: string;
   resepsiDate?: string;
@@ -23,7 +24,8 @@ export interface WeddingConfig {
   weddingGift?: WeddingGiftItem[];
   theme?: ThemeType;
   layout?: LayoutType;
-  eventType?: string;
+  instagram?: string;
+  contactPerson?: string;
 }
 
 export interface LoveStoryItem {
@@ -74,17 +76,18 @@ export type LayoutType =
   | 'boho'
   | 'simple';
 
-// Utility type untuk props komponen
 export type WithChildren<T = Record<string, never>> = T & {
   children?: React.ReactNode;
 };
 
-// Untuk konfigurasi landing
+// ========== LANDING CONFIG ==========
 export interface LandingConfig {
   brandName: string;
   tagline: string;
   description: string;
   heroImage?: string;
+  brandLogo?: string;       // <-- Tambahkan
+  brandFavicon?: string;    // <-- Tambahkan
   features: Feature[];
   howToOrder: HowToStep[];
   pricing: PricingPlan[];

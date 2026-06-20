@@ -13,9 +13,7 @@ const fetchWithRetry = async (
   for (let i = 0; i < retries; i++) {
     try {
       const res = await fetch(url, { signal });
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status} - ${res.statusText}`);
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
       return res;
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
@@ -86,16 +84,12 @@ export default function useCustomerConfig(slug: string): UseCustomerConfigResult
 
       configCache.set(slug, data);
       setConfig(data);
-      
-      // Set theme dan layout ke HTML
       document.documentElement.setAttribute('data-theme', data.theme || 'romantic');
-      document.documentElement.setAttribute('data-layout', data.layout || 'classic');
+      // Layout akan di-set oleh LayoutSelector
       document.title = `Undangan ${data.bride} & ${data.groom}`;
       retryCountRef.current = 0;
     } catch (err) {
-      if (err instanceof Error && err.name === 'AbortError') {
-        return;
-      }
+      if (err instanceof Error && err.name === 'AbortError') return;
       const message = err instanceof Error ? err.message : 'Gagal memuat undangan';
       setError(message);
       

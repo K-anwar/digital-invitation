@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import SEO from '@/components/common/SEO';
 import type { LandingConfig } from '@/types';
+import { getMediaUrl } from '@/utils/imageHelper';
 
 export default function LandingPage() {
   const [config, setConfig] = useState<LandingConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const baseUrl = import.meta.env.BASE_URL || '/';
 
   useEffect(() => {
-    const baseUrl = import.meta.env.BASE_URL || '/';
     const controller = new AbortController();
 
     fetch(`${baseUrl}config/landing.json`, { signal: controller.signal })
@@ -25,7 +26,7 @@ export default function LandingPage() {
       .finally(() => setLoading(false));
 
     return () => controller.abort();
-  }, []);
+  }, [baseUrl]);
 
   if (loading) {
     return (
@@ -44,19 +45,34 @@ export default function LandingPage() {
   }
 
   const whatsappLink = `https://wa.me/${config.contact.whatsapp}?text=Halo%20Digital%20Wedding%20Invitation,%20saya%20ingin%20pesan%20undangan%20pernikahan`;
+  const logoUrl = config.brandLogo ? getMediaUrl(config.brandLogo, baseUrl) : '';
+  const faviconUrl = config.brandFavicon ? getMediaUrl(config.brandFavicon, baseUrl) : '';
 
   return (
     <div className="min-h-screen bg-linear-to-b from-pink-50 to-white">
       <SEO
         title={`${config.brandName} - ${config.tagline}`}
         description={config.description}
-        image={config.heroImage}
+        image={config.heroImage || logoUrl}
+        favicon={faviconUrl}
+        brandLogo={logoUrl}
         keywords="undangan pernikahan digital, wedding invitation online, undangan online"
       />
 
       <header className="relative overflow-hidden bg-linear-to-r from-pink-100 to-rose-100">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
           <div className="text-center">
+            {/* Logo Brand */}
+            {logoUrl && (
+              <div className="mb-6 flex justify-center">
+                <img 
+                  src={logoUrl} 
+                  alt={config.brandName} 
+                  className="h-16 md:h-20 w-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+            )}
             <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', color: '#b56576' }}>
               {config.brandName}
             </h1>

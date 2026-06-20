@@ -1,4 +1,5 @@
 import { useMemo, memo } from 'react';
+import { getGalleryUrls, getCloudinaryThumbnail } from '@/utils/imageHelper';
 
 interface GalleryProps {
   images?: string[];
@@ -9,10 +10,9 @@ function Gallery({ images }: GalleryProps) {
 
   const processedImages = useMemo(() => {
     if (!images || images.length === 0) return [];
-    return images.map((src) => {
-      if (src.startsWith('http')) return src;
-      return `${baseUrl}${src.replace(/^\.\//, '').replace(/^\//, '')}`;
-    });
+    const urls = getGalleryUrls(images, baseUrl);
+    // Optimasi thumbnail untuk gallery
+    return urls.map((url) => getCloudinaryThumbnail(url, 400, 400));
   }, [images, baseUrl]);
 
   if (!images || images.length === 0) return null;

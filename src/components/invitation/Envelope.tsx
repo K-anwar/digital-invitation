@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback, memo, ReactNode } from 'react
 import Confetti from '@/components/common/Confetti';
 import Ornament from '@/components/common/Ornament';
 import { WeddingConfig } from '@/types';
+import { getMediaUrl } from '@/utils/imageHelper';
 
 interface EnvelopeProps {
   config: WeddingConfig;
@@ -18,9 +19,7 @@ function Envelope({ config, children, onOpenInvitation }: EnvelopeProps) {
 
   const audioSrc = useCallback(() => {
     if (!config?.music) return null;
-    return config.music.startsWith('http')
-      ? config.music
-      : `${baseUrl}${config.music.replace(/^\.\//, '').replace(/^\//, '')}`;
+    return getMediaUrl(config.music, baseUrl);
   }, [config?.music, baseUrl]);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ function Envelope({ config, children, onOpenInvitation }: EnvelopeProps) {
 
     if (audioRef.current && !audioError) {
       audioRef.current.play().catch(() => {
-        // Autoplay diblokir browser, tidak perlu error
         console.debug('Autoplay diblokir');
       });
     }
@@ -61,6 +59,17 @@ function Envelope({ config, children, onOpenInvitation }: EnvelopeProps) {
   const handleInvitationClick = useCallback(() => {
     if (onOpenInvitation) onOpenInvitation();
   }, [onOpenInvitation]);
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
 
   return (
     <div
@@ -123,11 +132,7 @@ function Envelope({ config, children, onOpenInvitation }: EnvelopeProps) {
                 {config.bride} & {config.groom}
               </h2>
               <p className="text-md italic" style={{ color: 'var(--text-soft)' }}>
-                {new Date(config.eventDate).toLocaleDateString('id-ID', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
+                {formatDate(config.eventDate)}
               </p>
             </div>
           )}

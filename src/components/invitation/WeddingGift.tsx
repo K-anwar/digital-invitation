@@ -1,5 +1,6 @@
 import { useState, useCallback, memo } from 'react';
 import { WeddingGiftItem } from '@/types';
+import { getMediaUrl } from '@/utils/imageHelper';
 
 interface WeddingGiftProps {
   giftConfig?: WeddingGiftItem[];
@@ -25,6 +26,12 @@ function WeddingGift({ giftConfig }: WeddingGiftProps) {
 
   const isAddress = selected?.type === 'Alamat Rumah';
 
+  // Proses logo URL
+  const getLogoUrl = (logo?: string) => {
+    if (!logo) return null;
+    return getMediaUrl(logo, baseUrl);
+  };
+
   return (
     <div className="space-y-6">
       <h2
@@ -35,35 +42,34 @@ function WeddingGift({ giftConfig }: WeddingGiftProps) {
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {giftConfig.map((gift, index) => (
-          <button
-            key={index}
-            onClick={() => handleSelect(gift)}
-            className="p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-md flex flex-col items-center gap-2"
-            style={{
-              backgroundColor: 'var(--bg-card)',
-              boxShadow: 'var(--shadow)',
-              border: selected?.type === gift.type ? '2px solid var(--primary)' : '2px solid transparent',
-            }}
-          >
-            {gift.logo ? (
-              <img
-                src={
-                  gift.logo.startsWith('http')
-                    ? gift.logo
-                    : `${baseUrl}${gift.logo.replace(/^\.\//, '').replace(/^\//, '')}`
-                }
-                alt={gift.bank || gift.type}
-                className="w-12 h-12 object-contain"
-                loading="lazy"
-                onError={(e) => (e.currentTarget.style.display = 'none')}
-              />
-            ) : (
-              <span className="text-3xl">{gift.icon || '💝'}</span>
-            )}
-            <span className="text-xs font-semibold">{gift.type}</span>
-          </button>
-        ))}
+        {giftConfig.map((gift, index) => {
+          const logoUrl = getLogoUrl(gift.logo);
+          return (
+            <button
+              key={index}
+              onClick={() => handleSelect(gift)}
+              className="p-4 rounded-2xl text-center transition-all hover:scale-105 shadow-md flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                boxShadow: 'var(--shadow)',
+                border: selected?.type === gift.type ? '2px solid var(--primary)' : '2px solid transparent',
+              }}
+            >
+              {logoUrl ? (
+                <img
+                  src={logoUrl}
+                  alt={gift.bank || gift.type}
+                  className="w-12 h-12 object-contain"
+                  loading="lazy"
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
+              ) : (
+                <span className="text-3xl">{gift.icon || '💝'}</span>
+              )}
+              <span className="text-xs font-semibold">{gift.type}</span>
+            </button>
+          );
+        })}
       </div>
 
       {selected && (
@@ -74,11 +80,7 @@ function WeddingGift({ giftConfig }: WeddingGiftProps) {
           <div className="mb-4">
             {selected.logo ? (
               <img
-                src={
-                  selected.logo.startsWith('http')
-                    ? selected.logo
-                    : `${baseUrl}${selected.logo.replace(/^\.\//, '').replace(/^\//, '')}`
-                }
+                src={getLogoUrl(selected.logo) || ''}
                 alt={selected.bank || selected.type}
                 className="w-20 h-20 mx-auto object-contain"
                 loading="lazy"

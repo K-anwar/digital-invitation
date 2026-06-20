@@ -14,6 +14,7 @@ import SEO from '@/components/common/SEO';
 import Ornament from '@/components/common/Ornament';
 import LoadingScreen from '@/components/common/LoadingScreen';
 import GuestBook from '@/components/common/GuestBook';
+import { getMediaUrl } from '@/utils/imageHelper';
 
 const WeddingGift = lazy(() => import('@/components/invitation/WeddingGift'));
 
@@ -27,9 +28,7 @@ export default function InvitationPage() {
   const seoImage = useMemo(() => {
     const firstImage = config?.gallery?.[0];
     if (!firstImage) return '';
-    return firstImage.startsWith('http')
-      ? firstImage
-      : `${window.location.origin}${baseUrl}${firstImage.replace(/^\.\//, '').replace(/^\//, '')}`;
+    return getMediaUrl(firstImage, baseUrl);
   }, [config?.gallery, baseUrl]);
 
   if (loading) return <LoadingScreen />;
