@@ -5,7 +5,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/digital-invitation/', // GitHub Pages repo name
+  base: '/vowcraft/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

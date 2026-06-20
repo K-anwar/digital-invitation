@@ -1,0 +1,183 @@
+/* ============================================
+   LAYOUT STYLES - Berdasarkan data-layout
+   ============================================ */
+
+/* --- CLASSIC LAYOUT --- */
+[data-layout="classic"] .glass-card {
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  background: rgba(255, 248, 245, 0.85);
+}
+
+[data-layout="classic"] .premium-divider {
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg, 
+    var(--primary), 
+    var(--primary) 10px, 
+    transparent 10px, 
+    transparent 20px
+  );
+}
+
+[data-layout="classic"] h1, 
+[data-layout="classic"] h2 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+}
+
+/* --- MODERN LAYOUT --- */
+[data-layout="modern"] .glass-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.8);
+}
+
+[data-layout="modern"] .premium-divider {
+  height: 2px;
+  background: var(--primary-gradient);
+  opacity: 0.3;
+}
+
+[data-layout="modern"] h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* --- MINIMAL LAYOUT --- */
+[data-layout="minimal"] .glass-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  background: white;
+}
+
+[data-layout="minimal"] .premium-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+[data-layout="minimal"] .btn-premium {
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* --- ELEGANT LAYOUT --- */
+[data-layout="elegant"] .glass-card {
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.7);
+}
+
+[data-layout="elegant"] .premium-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 2rem 0;
+}
+
+[data-layout="elegant"] h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+/* --- TROPICAL LAYOUT --- */
+[data-layout="tropical"] .glass-card {
+  border: 2px solid var(--primary-light);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(232, 93, 117, 0.08);
+  background: rgba(255,255,255,0.6);
+}
+
+[data-layout="tropical"] .premium-divider {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  border-radius: 10px;
+}
+
+[data-layout="tropical"] .btn-premium {
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* --- LUXURY LAYOUT --- */
+[data-layout="luxury"] .glass-card {
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.7);
+}
+
+[data-layout="luxury"] .premium-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 2rem 0;
+}
+
+[data-layout="luxury"] h1 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.08em;
+}
+
+[data-layout="luxury"] .btn-premium {
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+[data-layout="luxury"] .btn-premium:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* --- BOHO LAYOUT --- */
+[data-layout="boho"] .glass-card {
+  border: 2px dashed var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+  background: rgba(255,255,255,0.6);
+}
+
+[data-layout="boho"] .premium-divider {
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+[data-layout="boho"] .btn-premium {
+  border-radius: 50px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+}
+
+/* --- SIMPLE LAYOUT --- */
+[data-layout="simple"] .glass-card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  background: white;
+}
+
+[data-layout="simple"] .premium-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1rem 0;
+}
+
+[data-layout="simple"] .btn-premium {
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-weight: 500;
+}

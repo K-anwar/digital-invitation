@@ -22,6 +22,8 @@ export interface WeddingConfig {
   checkinScriptUrl?: string;
   weddingGift?: WeddingGiftItem[];
   theme?: ThemeType;
+  layout?: LayoutType;
+  eventType?: string;
 }
 
 export interface LoveStoryItem {
@@ -61,6 +63,16 @@ export type ThemeType =
   | 'glamour'
   | 'minimalis'
   | 'tropical';
+
+export type LayoutType =
+  | 'classic'
+  | 'modern'
+  | 'minimal'
+  | 'elegant'
+  | 'tropical'
+  | 'luxury'
+  | 'boho'
+  | 'simple';
 
 // Utility type untuk props komponen
 export type WithChildren<T = Record<string, never>> = T & {

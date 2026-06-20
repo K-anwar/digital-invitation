@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./themes/index.css";
+@import "./layouts/index.css";
 
 /* Animasi flip untuk countdown */
 @keyframes flip {

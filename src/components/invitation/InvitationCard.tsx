@@ -8,6 +8,7 @@ interface InvitationCardProps {
 
 export default function InvitationCard({ config, guest }: InvitationCardProps) {
   const baseUrl = import.meta.env.BASE_URL || '/';
+  const layout = config?.layout || 'classic';
 
   const bridePhotoUrl = useMemo(() => {
     if (!config.bridePhoto) return '';
@@ -23,7 +24,6 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
       : `${baseUrl}${config.groomPhoto.replace(/^\.\//, '').replace(/^\//, '')}`;
   }, [config.groomPhoto, baseUrl]);
 
-  // Helper untuk format tanggal
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
     const date = new Date(dateStr);
@@ -46,17 +46,38 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
     });
   };
 
-  // Cek apakah ada akadDate atau resepsiDate terpisah
-  const hasSeparateAkad = config.akadDate && config.akadDate !== config.eventDate;
-  const hasSeparateResepsi = config.resepsiDate && config.resepsiDate !== config.eventDate;
-
-  // Jika ada akadDate, gunakan itu untuk akad; jika tidak, gunakan eventDate
   const akadDate = config.akadDate || config.eventDate;
   const resepsiDate = config.resepsiDate || config.eventDate;
+  const isAkadDifferent = config.akadDate && config.akadDate !== config.eventDate;
+  const isResepsiDifferent = config.resepsiDate && config.resepsiDate !== config.eventDate;
+  const isAkadAndResepsiDifferent = config.akadDate && config.resepsiDate && config.akadDate !== config.resepsiDate;
+
+  // Varian card berdasarkan layout
+  const getCardClasses = () => {
+    const base = 'p-6 md:p-10 text-center relative overflow-hidden glass-card';
+    switch (layout) {
+      case 'classic':
+        return `${base} border-4 border-double border-primary/20 rounded-3xl`;
+      case 'minimal':
+        return `${base} border-0 shadow-sm rounded-xl`;
+      case 'elegant':
+        return `${base} border-2 rounded-2xl shadow-gold`;
+      case 'tropical':
+        return `${base} border-2 border-primary/30 rounded-3xl`;
+      case 'luxury':
+        return `${base} border-2 border-accent rounded-2xl shadow-2xl`;
+      case 'boho':
+        return `${base} border-2 border-dashed rounded-3xl`;
+      case 'simple':
+        return `${base} border-0 rounded-lg shadow-sm`;
+      default:
+        return `${base} rounded-2xl`;
+    }
+  };
 
   return (
     <div
-      className="p-6 md:p-10 text-center relative overflow-hidden glass-card"
+      className={getCardClasses()}
       style={{ borderRadius: 'var(--radius-lg)' }}
       role="article"
       aria-label="Kartu undangan pernikahan"
@@ -124,7 +145,6 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
       <hr className="premium-divider" />
 
       <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-        {/* Akad */}
         <div className="text-center">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
             Akad Nikah
@@ -135,14 +155,13 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
           <p className="text-sm mt-1" style={{ color: 'var(--text-soft)' }}>
             Pukul {formatTime(akadDate)}
           </p>
-          {hasSeparateAkad && (
+          {(isAkadDifferent || isAkadAndResepsiDifferent) && (
             <p className="text-xs mt-1 opacity-60" style={{ color: 'var(--text-light)' }}>
               *Berbeda dengan resepsi
             </p>
           )}
         </div>
 
-        {/* Resepsi */}
         <div className="text-center">
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
             Resepsi
@@ -153,14 +172,13 @@ export default function InvitationCard({ config, guest }: InvitationCardProps) {
           <p className="text-sm mt-1" style={{ color: 'var(--text-soft)' }}>
             Pukul {formatTime(resepsiDate)}
           </p>
-          {hasSeparateResepsi && (
+          {(isResepsiDifferent || isAkadAndResepsiDifferent) && (
             <p className="text-xs mt-1 opacity-60" style={{ color: 'var(--text-light)' }}>
               *Berbeda dengan akad
             </p>
           )}
         </div>
 
-        {/* Lokasi - span 2 kolom jika ada */}
         <div className="sm:col-span-2 text-center pt-2 border-t" style={{ borderColor: 'var(--border-color)' }}>
           <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
             Lokasi

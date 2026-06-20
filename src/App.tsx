@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { AuthProvider } from '@/context/AuthContext';
 import Analytics from '@/components/common/Analytics';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
@@ -13,6 +13,13 @@ const CheckinPage = lazy(() => import('@/pages/CheckinPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function App() {
+  // Set default layout jika tidak ada
+  useEffect(() => {
+    if (!document.documentElement.hasAttribute('data-layout')) {
+      document.documentElement.setAttribute('data-layout', 'classic');
+    }
+  }, []);
+
   return (
     <HashRouter>
       <Analytics />

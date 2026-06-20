@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { WeddingConfig } from '@/types';
 
-// Cache berdasarkan slug
 const configCache = new Map<string, WeddingConfig>();
 
 const fetchWithRetry = async (
@@ -31,6 +30,7 @@ interface UseCustomerConfigResult {
   config: WeddingConfig | null;
   loading: boolean;
   error: string | null;
+  retry: () => void;
 }
 
 export default function useCustomerConfig(slug: string): UseCustomerConfigResult {
@@ -41,20 +41,25 @@ export default function useCustomerConfig(slug: string): UseCustomerConfigResult
   const [error, setError] = useState<string | null>(null);
   const lastSlugRef = useRef(slug);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const retryCountRef = useRef(0);
 
-  useEffect(() => {
-    // Jika slug berubah dan ada di cache
-    if (slug !== lastSlugRef.current) {
-      lastSlugRef.current = slug;
-      if (configCache.has(slug)) {
-        setConfig(configCache.get(slug)!);
+  const loadConfig = async (forceRefresh = false) => {
+    if (!slug) {
+      setError('Slug tidak valid');
+      setLoading(false);
+      return;
+    }
+
+    if (!forceRefresh) {
+      const cached = configCache.get(slug);
+      if (cached) {
+        setConfig(cached);
         setLoading(false);
         setError(null);
         return;
       }
     }
 
-    // Batalkan request sebelumnya
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -63,53 +68,51 @@ export default function useCustomerConfig(slug: string): UseCustomerConfigResult
 
     const baseUrl = import.meta.env.BASE_URL || '/';
 
-    const loadConfig = async () => {
-      if (!slug) {
-        setError('Slug tidak valid');
-        setLoading(false);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetchWithRetry(
+        `${baseUrl}config/${slug}.json?t=${Date.now()}`,
+        controller.signal,
+        2,
+        1000
+      );
+      const data = (await response.json()) as WeddingConfig;
+
+      if (!data.bride || !data.groom || !data.eventDate) {
+        throw new Error('Konfigurasi tidak lengkap');
+      }
+
+      configCache.set(slug, data);
+      setConfig(data);
+      
+      // Set theme dan layout ke HTML
+      document.documentElement.setAttribute('data-theme', data.theme || 'romantic');
+      document.documentElement.setAttribute('data-layout', data.layout || 'classic');
+      document.title = `Undangan ${data.bride} & ${data.groom}`;
+      retryCountRef.current = 0;
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') {
         return;
       }
-
-      // Cek cache (race condition)
-      if (configCache.has(slug)) {
-        setConfig(configCache.get(slug)!);
-        setLoading(false);
-        return;
+      const message = err instanceof Error ? err.message : 'Gagal memuat undangan';
+      setError(message);
+      
+      if (retryCountRef.current < 2) {
+        retryCountRef.current++;
+        setTimeout(() => loadConfig(true), 2000);
       }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      setLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetchWithRetry(
-          `${baseUrl}config/${slug}.json`,
-          controller.signal,
-          2,
-          1000
-        );
-        const data = (await response.json()) as WeddingConfig;
-
-        // Validasi minimal
-        if (!data.bride || !data.groom || !data.eventDate) {
-          throw new Error('Konfigurasi tidak lengkap');
-        }
-
-        configCache.set(slug, data);
-        setConfig(data);
-        document.documentElement.setAttribute('data-theme', data.theme || 'romantic');
-        document.title = `Undangan ${data.bride} & ${data.groom}`;
-      } catch (err) {
-        if (err instanceof Error && err.name === 'AbortError') {
-          // Abort adalah normal
-          return;
-        }
-        const message = err instanceof Error ? err.message : 'Gagal memuat undangan';
-        setError(message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+  useEffect(() => {
+    if (slug !== lastSlugRef.current) {
+      lastSlugRef.current = slug;
+      retryCountRef.current = 0;
+    }
     loadConfig();
 
     return () => {
@@ -120,5 +123,10 @@ export default function useCustomerConfig(slug: string): UseCustomerConfigResult
     };
   }, [slug]);
 
-  return { config, loading, error };
+  const retry = () => {
+    retryCountRef.current = 0;
+    loadConfig(true);
+  };
+
+  return { config, loading, error, retry };
 }
