@@ -12,7 +12,6 @@ import ShareButton from '@/components/common/ShareButton';
 import DressCode from '@/components/common/DressCode';
 import SEO from '@/components/common/SEO';
 import Ornament from '@/components/common/Ornament';
-import LoadingScreen from '@/components/common/LoadingScreen';
 import GuestBook from '@/components/common/GuestBook';
 import { getMediaUrl } from '@/utils/imageHelper';
 
